@@ -1,24 +1,19 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import Spots from "./Spots";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>SwellPlus</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          This is built to better predict the conditions specifically for the
+          best wave in the world, Reef Rights. Other waves may be added in the
+          future{" "}
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
       </header>
+      <Spots />
     </div>
   );
 }
