@@ -1,22 +1,76 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 10vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+.spot-list {
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+}
+
+.spot-card {
+  margin: 1em;
+}
+
+.swell-list {
+  font-size: 1rem;
+  display: inline-flex;
+  list-style-type: none;
+  padding-left: 1em;
+}
+
+.swell-list li {
+  padding-right: 0.5em;
+}
+
+.data-grid {
+  display: flex;
+}
+
+.col {
+  width: 100%;
+}
+
+.header {
+}
+
+.footer {
+  margin-top: 10px;
+  width: 100%;
+  color: white;
+  text-align: center;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  padding-top: 1em;
+}
+
+.footer a {
   color: white;
 }
 
-.App-link {
-  color: #09d3ac;
+.spot-icon {
+  width: 15%;
+  margin-right: 0.5em;
+}
+
+.swell-data {
+  text-align: center;
+}
+
+/* Search Container */
+.search-area {
+  padding-top: 10px;
+  margin-left: 50px;
+  margin-right: 115px;
+  text-align: center;
+}
+
+.search-results {
+  list-style-type: none;
+}
+.search-results li {
+  text-align: left;
+  border: 1px solid #ddd;
+  background-color: #f6f6f6;
+  text-decoration: none;
+  color: black;
+  display: block;
+}
+.search-results li:hover:not(.header) {
+  background-color: #eee;
 }
