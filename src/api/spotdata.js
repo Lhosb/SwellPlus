@@ -9,7 +9,5 @@ export const spotsData = [
       wind: { speed: { min: 0, max: 5 }, direction: { min: 0, max: 60 } },
       tide: { min: 5, max: 2.5, rising: false, dropping: true },
     },
-    spotReport: {},
-    spotForecast: { tides: {}, waves: {}, wind: {} },
   },
 ];

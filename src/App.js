@@ -6,6 +6,7 @@ import Footer from "./Footer";
 import Container from "react-bootstrap/Container";
 import { fetchSearchQuery } from "./API/api";
 import { fetchSpotReport } from "./API/api";
+import { spotsData } from "./API/spotdata.js";
 import "./App.css";
 
 function App() {
@@ -19,9 +20,11 @@ function App() {
   const [searchResults, setSearchResults] = useState([]);
   const [showResults, setShowResults] = useState(false);
   const [userSpotReports, setUserSpotReports] = useState([]);
+  const [idealConditions, setIdealConditions] = useState([]);
 
   useEffect(() => {
     getUserIds();
+    setIdealConditions(spotsData);
   }, []);
 
   useEffect(() => {
@@ -33,7 +36,9 @@ function App() {
     if (spotIds.length > 0) {
       spotIds.forEach((id) => {
         fetchSpotReport(id).then((report) => {
-          newReports.push(report);
+          let newReport = report;
+          newReport.id = id;
+          newReports.push(newReport);
         });
       });
     }
@@ -79,7 +84,11 @@ function App() {
         {showResults && (
           <Results addNewSpot={addNewSpot} searchResults={searchResults} />
         )}
-        <Spots userSpotReports={userSpotReports} removeSpot={removeSpot} />
+        <Spots
+          idealConditions={idealConditions}
+          userSpotReports={userSpotReports}
+          removeSpot={removeSpot}
+        />
       </Container>
       <Footer />
     </div>

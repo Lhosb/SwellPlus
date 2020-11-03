@@ -1,39 +1,10 @@
 import React from "react";
-import { Card, Col, Button } from "react-bootstrap";
+import SurflineData from "./SurflineData";
+import { Col, Button, Carousel, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faArrowUp,
-  faArrowDown,
-  faTimes,
-} from "@fortawesome/free-solid-svg-icons";
-import Wave from "./icons/beach.svg";
-import Tide from "./icons/high-tide.svg";
-import Water from "./icons/water-temperature.svg";
-import Wind from "./icons/wind.svg";
-import Weather from "./icons/cloudy.svg";
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
 
-const SpotCard = ({
-  index,
-  name,
-  tide,
-  swells,
-  waveHeight,
-  wind,
-  waterTemp,
-  weather,
-  units,
-  removeSpot,
-}) => {
-  const swell = swells.map((swell) => {
-    if (swell.height && swell.period > 0) {
-      return (
-        <li>
-          {swell.height} ft. at {swell.period}s {swell.direction}º
-        </li>
-      );
-    }
-  });
-
+const SpotCard = ({ index, report, removeSpot, idealConditions }) => {
   const handleClose = () => {
     removeSpot(index);
   };
@@ -47,55 +18,57 @@ const SpotCard = ({
         className="spot-card box"
       >
         <Card.Header>
-          {name}
+          {report.spot.name}
           <Button onClick={handleClose} style={{ float: "right" }}>
             <FontAwesomeIcon icon={faTimes} />
           </Button>
         </Card.Header>
-        <Card.Body>
-          <Card.Subtitle>Surfline Report</Card.Subtitle>
-          <br />
-          <div className="data-grid">
-            <div className="col">
-              <Card.Text>
-                <img className="spot-icon" src={Wave} alt="Wave"></img>{" "}
-                {waveHeight.min}-{waveHeight.max} {units.waveHeight}.{" "}
-              </Card.Text>
-              <Card.Text>
-                <img className="spot-icon" src={Tide} alt="Wave"></img>{" "}
-                {tide.current.height} {units.tideHeight}.{" "}
-                <FontAwesomeIcon
-                  icon={
-                    tide.current.height > tide.next.height
-                      ? faArrowDown
-                      : faArrowUp
-                  }
-                />
-              </Card.Text>
-              <Card.Text>
-                <img className="spot-icon" src={Wind} alt="Wave"></img>{" "}
-                {wind.speed} {units.windSpeed}. @ {wind.direction}°
-              </Card.Text>
-            </div>
-            <div className="col">
-              <Card.Text>
-                <img className="spot-icon" src={Water} alt="Wave"></img>{" "}
-                {waterTemp.min}-{waterTemp.max}°{units.temperature}
-              </Card.Text>
-              <Card.Text>
-                <img className="spot-icon" src={Weather} alt="Wave"></img>{" "}
-                {weather.temperature}°{units.temperature}
-              </Card.Text>
-            </div>
-          </div>
-          <div className="swell-data">
-            <div className="swells-header">Swells</div>
-            <ul className="swell-list">{swell}</ul>
-          </div>
-        </Card.Body>
+
+        <Carousel interval={null}>
+          <Carousel.Item>
+            <Card.Body>
+              <SurflineData
+                name={report.spot.name}
+                tide={report.forecast.tide}
+                swells={report.forecast.swells}
+                waveHeight={report.forecast.waveHeight}
+                wind={report.forecast.wind}
+                waterTemp={report.forecast.waterTemp}
+                weather={report.forecast.weather}
+                units={report.units}
+              />
+            </Card.Body>
+          </Carousel.Item>
+          <Carousel.Item>
+            <Card.Body>
+              <SurflineData
+                name={report.spot.name}
+                tide={report.forecast.tide}
+                swells={report.forecast.swells}
+                waveHeight={report.forecast.waveHeight}
+                wind={report.forecast.wind}
+                waterTemp={report.forecast.waterTemp}
+                weather={report.forecast.weather}
+                units={report.units}
+              />
+            </Card.Body>
+          </Carousel.Item>
+        </Carousel>
       </Card>
     </Col>
   );
 };
 
 export default SpotCard;
+
+// const report = {
+//    forecast:
+//     conditions: {human: true, value: "FAIR", expired: false, sortableCondition: 7},
+//     note: null,
+//     swells: (6) [{…}, {…}, {…}, {…}, {…}, {…}],
+//     tide: {previous: {…}, current: {…}, next: {…}},
+//     waterTemp: {min: 68, max: 70},
+//     waveHeight: {human: true, min: 3, max: 5, occasional: null, humanRelation: "Waist to head high", …},
+//     weather: {temperature: 61, condition: "NIGHT_CLEAR_NO_RAIN"},
+//     wind: {speed: 3, direction: 192.01}
+//   }

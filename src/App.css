@@ -2,6 +2,11 @@
   justify-content: center;
 }
 
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  /* move arrows out to border */
+}
+
 .spot-card {
   margin: 1em;
 }
@@ -29,7 +34,7 @@
 }
 
 .footer {
-  margin-top: 10px;
+  margin-top: 3em;
   width: 100%;
   color: white;
   text-align: center;
