@@ -1,7 +1,7 @@
 import React from "react";
 
-const IdealConditions = (props) => {
-  return <div />;
+const IdealConditions = ({ humanAnalysis }) => {
+  return <div>{humanAnalysis}</div>;
 };
 
 export default IdealConditions;

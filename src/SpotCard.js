@@ -1,13 +1,17 @@
 import React from "react";
 import SurflineData from "./SurflineData";
+import IdealConditions from "./IdealConditions";
 import { Col, Button, Carousel, Card } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { analyzeData } from "./API/spotdata";
 
 const SpotCard = ({ index, report, removeSpot, idealConditions }) => {
   const handleClose = () => {
     removeSpot(index);
   };
+
+  const humanAnalysis = analyzeData(report, idealConditions.optimalConditions);
 
   return (
     <Col lg={4} md={"auto"} sm={"auto"}>
@@ -41,16 +45,7 @@ const SpotCard = ({ index, report, removeSpot, idealConditions }) => {
           </Carousel.Item>
           <Carousel.Item>
             <Card.Body>
-              <SurflineData
-                name={report.spot.name}
-                tide={report.forecast.tide}
-                swells={report.forecast.swells}
-                waveHeight={report.forecast.waveHeight}
-                wind={report.forecast.wind}
-                waterTemp={report.forecast.waterTemp}
-                weather={report.forecast.weather}
-                units={report.units}
-              />
+              <IdealConditions humanAnalysis={humanAnalysis} />
             </Card.Body>
           </Carousel.Item>
         </Carousel>

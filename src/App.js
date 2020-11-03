@@ -72,7 +72,7 @@ function App() {
   const removeSpot = (index) => {
     let id = spotIds[index];
     let newSpotIds = spotIds.filter((spotId) => {
-      return spotId != id;
+      return spotId !== id;
     });
     setSpotIds(newSpotIds);
   };

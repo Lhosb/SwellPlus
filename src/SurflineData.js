@@ -19,10 +19,10 @@ const SurflineData = ({
   weather,
   units,
 }) => {
-  const swell = swells.map((swell) => {
+  const swell = swells.map((swell, index) => {
     if (swell.height && swell.period > 0) {
       return (
-        <li>
+        <li key={index}>
           {swell.height} ft. at {swell.period}s {swell.direction}º
         </li>
       );
@@ -36,12 +36,12 @@ const SurflineData = ({
       <div className="data-grid">
         <div className="col">
           <Card.Text>
-            <img className="spot-icon" src={Wave} alt="Wave"></img>{" "}
-            {waveHeight.min}-{waveHeight.max} {units.waveHeight}.{" "}
+            <img className="spot-icon" src={Wave} alt="Wave"></img>
+            {waveHeight.min}-{waveHeight.max} {units.waveHeight}.
           </Card.Text>
           <Card.Text>
-            <img className="spot-icon" src={Tide} alt="Wave"></img>{" "}
-            {tide.current.height} {units.tideHeight}.{" "}
+            <img className="spot-icon" src={Tide} alt="Wave"></img>
+            {tide.current.height} {units.tideHeight}.
             <FontAwesomeIcon
               icon={
                 tide.current.height > tide.next.height ? faArrowDown : faArrowUp
@@ -49,17 +49,17 @@ const SurflineData = ({
             />
           </Card.Text>
           <Card.Text>
-            <img className="spot-icon" src={Wind} alt="Wave"></img> {wind.speed}{" "}
+            <img className="spot-icon" src={Wind} alt="Wave"></img> {wind.speed}
             {units.windSpeed}. @ {wind.direction}°
           </Card.Text>
         </div>
         <div className="col">
           <Card.Text>
-            <img className="spot-icon" src={Water} alt="Wave"></img>{" "}
+            <img className="spot-icon" src={Water} alt="Wave"></img>
             {waterTemp.min}-{waterTemp.max}°{units.temperature}
           </Card.Text>
           <Card.Text>
-            <img className="spot-icon" src={Weather} alt="Wave"></img>{" "}
+            <img className="spot-icon" src={Weather} alt="Wave"></img>
             {weather.temperature}°{units.temperature}
           </Card.Text>
         </div>
