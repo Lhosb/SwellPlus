@@ -4,12 +4,13 @@ import { Row } from "react-bootstrap";
 
 const Spots = ({ userSpotReports, idealConditions, removeSpot }) => {
   const spots = userSpotReports.map((report, index) => {
+    const conditions = idealConditions.find((spot) => spot.id === report.id);
     return (
       <SpotCard
         key={index}
         index={index}
         report={report}
-        idealConditions={idealConditions.find((spot) => spot.id === report.id)}
+        idealConditions={conditions ? conditions : false}
         removeSpot={removeSpot}
       />
     );

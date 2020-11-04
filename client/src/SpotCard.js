@@ -11,7 +11,13 @@ const SpotCard = ({ index, report, removeSpot, idealConditions }) => {
     removeSpot(index);
   };
 
-  const humanAnalysis = analyzeData(report, idealConditions.optimalConditions);
+  const secondItem = idealConditions ? (
+    <IdealConditions
+      humanAnalysis={analyzeData(report, idealConditions.optimalConditions)}
+    />
+  ) : (
+    "Form"
+  );
 
   return (
     <Col lg={4} md={"auto"} sm={"auto"}>
@@ -44,9 +50,7 @@ const SpotCard = ({ index, report, removeSpot, idealConditions }) => {
             </Card.Body>
           </Carousel.Item>
           <Carousel.Item>
-            <Card.Body>
-              <IdealConditions humanAnalysis={humanAnalysis} />
-            </Card.Body>
+            <Card.Body>{secondItem}</Card.Body>
           </Carousel.Item>
         </Carousel>
       </Card>

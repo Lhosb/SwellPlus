@@ -9,7 +9,7 @@ export const spotsData = [
         height: { min: 5, max: 8 },
       },
       wind: { speed: { min: 0, max: 5 }, direction: { min: 0, max: 60 } },
-      tide: { min: 2.5, max: 5, rising: true, dropping: true },
+      tide: { min: 2.5, max: 5 },
     },
   },
 ];
@@ -25,6 +25,13 @@ const humanScale = {
 };
 
 export const analyzeData = (report, spotData) => {
+  const ourReport = {
+    human: { scale: 0, analysis: "" },
+    tide: "",
+    wind: { direction: "", speed: "" },
+    swells: [],
+  };
+
   let analysis = 0;
 
   // TIDE ANAYSIS
@@ -35,7 +42,10 @@ export const analyzeData = (report, spotData) => {
     reportTide.current.height >= spotDataTide.min &&
     reportTide.current.height <= spotDataTide.max
   ) {
+    ourReport.tide = "In the sweet spot.";
     analysis++;
+  } else {
+    ourReport.tide = "Outside ideal tide range.";
   }
 
   // WIND ANALYSIS
@@ -46,14 +56,20 @@ export const analyzeData = (report, spotData) => {
     reportWind.speed >= spotDataWind.speed.min &&
     reportWind.speed <= spotDataWind.speed.max
   ) {
+    ourReport.wind.speed = "Not too windy.";
     analysis++;
+  } else {
+    ourReport.wind.speed = "Wind might be to strong.";
   }
 
   if (
     reportWind.direction >= spotDataWind.direction.min &&
     reportWind.direction <= spotDataWind.direction.max
   ) {
+    ourReport.wind.direction = "Good wind direction.";
     analysis++;
+  } else {
+    ourReport.wind.direction = "Bad wind direction.";
   }
 
   // SWELL ANALYSIS
@@ -72,14 +88,21 @@ export const analyzeData = (report, spotData) => {
       swell.direction >= spotDataSwellDirection.min &&
       swell.direction <= spotDataSwellDirection.max
     ) {
+      ourReport.swells.push({
+        swell,
+        analysis: "This swell could be good.",
+      });
       count++;
     }
+
     return count;
   });
 
   if (swellCount > 0) {
     analysis++;
   }
+  ourReport.human.scale = analysis;
+  ourReport.human.analysis = humanScale[analysis];
 
-  return humanScale[analysis];
+  return ourReport;
 };
